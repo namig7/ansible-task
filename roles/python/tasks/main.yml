@@ -1,0 +1,42 @@
+---
+- name: Install virtualenv
+  pip:
+    name: virtualenv
+    executable: pip3
+
+- name: Delete old python-app directory
+  file:
+    path: /var/www/python-app
+    state: absent
+    mode: 0777
+
+- name: Creates new python-app directory
+  file:
+    path: /var/www/python-app
+    state: directory
+    mode: 0777
+
+- name: Copy the binary files to the new python-app directory
+  copy:
+    src: "{{ app_dir }}python-app/app.py"
+    dest: /var/www/python-app/
+    mode: 0777
+
+- name: Copy the binary files to the new python-app directory
+  copy:
+    src: "{{ app_dir }}python-app/wsgi.py"
+    dest: /var/www/python-app/
+    mode: 0777
+
+- name: Create a virtual environment named py-env in the new python-app directory
+  ansible.builtin.shell:
+    cmd: virtualenv py-env
+    chdir: /var/www/python-app/
+
+- name: Install flask in the virtual environment
+  pip:
+    name: flask
+    virtualenv: /var/www/python-app/py-env
+
+- name: Run app.py
+  ansible.builtin.shell: /var/www/python-app/py-env/bin/python3 /var/www/python-app/app.py &
