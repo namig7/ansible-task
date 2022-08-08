@@ -17,6 +17,7 @@ Clone the repository to the home directory and start the deploy by running the n
 
 ``
 cd ansible-task
+
 ansible-playbook -i hosts rproxy-playbook.yml -b --ask-vault-password
 ``
 
