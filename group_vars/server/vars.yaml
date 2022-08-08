@@ -1,0 +1,10 @@
+---
+#non-sensitive db data
+    db_user: dbusername
+    db_name: dbname
+
+#sensitive db data
+    db_password: "{{ vault_db_password }}"
+
+#app directory
+    app_dir: /home/ubuntu/ansible-task/
