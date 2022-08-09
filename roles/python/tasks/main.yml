@@ -39,12 +39,6 @@
     dest: /var/www/python-app/
     mode: 0777
 
-- name: Copy the binary files to the new python-app directory
-  copy:
-    src: "{{ app_dir }}python-app/wsgi.py"
-    dest: /var/www/python-app/
-    mode: 0777
-
 - name: Create a virtual environment named py-env in the new python-app directory
   ansible.builtin.shell:
     cmd: virtualenv py-env
