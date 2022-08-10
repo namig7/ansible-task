@@ -50,5 +50,4 @@
     virtualenv: /var/www/python-app/py-env
 
 - name: Run app.py
-  ansible.builtin.shell: /var/www/python-app/py-env/bin/python3 /var/www/python-app/app.py &
-  
+  ansible.builtin.shell: /var/www/python-app/py-env/bin/flask --app /var/www/python-app/app.py run &
